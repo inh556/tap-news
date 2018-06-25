@@ -1,6 +1,5 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard'
-
 class NewsPanel extends React.Component {
   constructor() {
     super();
@@ -10,7 +9,16 @@ class NewsPanel extends React.Component {
   }
   componentDidMount() {
     this.loadMoreNews();
+    window.addEventListener('scroll', () => this.handleScroll());
   }
+
+  handleScroll() {
+    let scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    if((window.innerHeight + scrollY) >= (document.body.offsetHeight - 50)) {
+      this.loadMoreNews(); 
+    }
+  }
+
   loadMoreNews() {
     const news_url = 'http://' + window.location.hostname + ':3000/news';
     const request = new Request(news_url, {method: 'GET'});
