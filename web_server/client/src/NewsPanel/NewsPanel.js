@@ -1,4 +1,5 @@
 import React from 'react';
+import NewsCard from '../NewsCard/'
 
 class NewsPanel extends React.Component {
   constructor() {
