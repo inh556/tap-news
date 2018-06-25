@@ -1,5 +1,6 @@
 import React from 'react';
 import './NewsCard.css';
+
 class NewsCard extends React.Component {
   redirectToUrl(url, event) {
     event.preventDefault();
