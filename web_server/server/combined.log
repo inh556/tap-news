@@ -1,0 +1,48 @@
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:34:31.484Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:34:39.791Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:34:40.889Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:34:49.221Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:34:58.969Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:35:00.077Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: undefined,
+  timestamp: '2018-06-27T22:35:37.312Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:37:39.432Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:37:41.583Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:37:43.537Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:37:45.589Z',
+  [Symbol(level)]: 'error' }
+{ level: 'error',
+  message: 'GET',
+  timestamp: '2018-06-27T22:37:47.120Z',
+  [Symbol(level)]: 'error' }
