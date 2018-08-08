@@ -15,7 +15,7 @@ class NewsCard extends React.Component {
             <div className='col s4 fill'>
               <img src={this.props.news.urlToImage} alt='news'/>
             </div>
-            <div className="col s1"/>
+            {/* <div className="col s1"/> */}
             <div className="col s7">
               <div className="news-intro-col">
                 <div className="news-intro-panel">
