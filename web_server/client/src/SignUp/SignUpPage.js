@@ -1,11 +1,9 @@
 import React from 'react';
 import SignUpForm from './SignUpForm';
-
+import Auth from '../Auth/Auth'
 class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
-
-    // set the initial component state
     this.state = {
       errors: {},
       user: {
@@ -32,7 +30,38 @@ class SignUpPage extends React.Component {
       return;
     }
 
-    //TODO: Post registeration data.
+    const url = 'http://' + window.location.hostname + ':3000/auth/signup';
+    const request = Request(
+      url,
+      {
+        method: 'POST',
+        header: {
+          'Accept': 'application/json',
+          'Contend-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.state.user.email,
+          password: this.state.user.password
+        })
+      }
+    )
+    fetch(request).then(response => {
+      if(response.status === 200) {
+        this.setState({
+          errors: {}
+        })
+        window.location.replace('/login');
+      } else {
+        response.json().then(json => {
+          console.log(json);
+          const errors = json.errors ? json.errors : {};
+          errors.summary = json.message;
+          console.log(this.state.errors);
+          this.setState({errors});
+        })
+      }
+    })
+    
   }
 
   changeUser(event) {
