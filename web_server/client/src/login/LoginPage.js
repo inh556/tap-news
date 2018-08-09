@@ -1,5 +1,7 @@
 import React from 'react';
 import LoginForm from './LoginForm';
+import Auth from '../Auth/Auth';
+
 class LoginPage extends React.Component {
   constructor() {
     super();
@@ -18,6 +20,40 @@ class LoginPage extends React.Component {
     // need to pass to server later
     console.log(email);
     console.log(password);
+
+    const url = 'http://' + window.location.hostname + ':3000/auth/login';
+    const request = new Request(
+      url,
+      {
+        method: 'POST', 
+        header: {
+          'Accept': 'application/json',
+          'Content.Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.state.user.email,
+          password: this.state.user.password
+        })
+    });
+    fetch(request).then(response => {
+      if(response.status === 200) {
+        this.setState({errors: {}});
+        response.json().then(json => {
+          console.log(json);
+          Auth.authenticateUser(json.token, email);
+          window.location.replace('/');
+        })
+      } 
+      else {
+        console.log('Login failed');
+        response.json().then(json => {
+          const errors = json.errors ? json.error: {};
+          errors.summary = json.message;
+          this.setState({errors});
+        })
+      }
+    } 
+    )
   }
   changeUser(event){
     const field = event.target.name;
