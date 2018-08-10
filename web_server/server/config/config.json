@@ -1,0 +1,4 @@
+{
+  "mongoDbUri": "mongodb://config:config123@ds259245.mlab.com:59245/tap-news",
+  "jwtSecret": "a secret phrese"
+}
