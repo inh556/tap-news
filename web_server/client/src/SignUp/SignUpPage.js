@@ -22,22 +22,18 @@ class SignUpPage extends React.Component {
     const password = this.state.user.password;
     const confirm_password = this.state.user.confirm_password;
 
-    console.log('email:', email);
-    console.log('password:', password);
-    console.log('confirm_password:', confirm_password);
-
     if (password !== confirm_password) {
       return;
     }
 
     const url = 'http://' + window.location.hostname + ':3000/auth/signup';
-    const request = Request(
+    const request = new Request(
       url,
       {
         method: 'POST',
-        header: {
+        headers: {
           'Accept': 'application/json',
-          'Contend-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           email: this.state.user.email,
@@ -53,15 +49,12 @@ class SignUpPage extends React.Component {
         window.location.replace('/login');
       } else {
         response.json().then(json => {
-          console.log(json);
           const errors = json.errors ? json.errors : {};
           errors.summary = json.message;
-          console.log(this.state.errors);
           this.setState({errors});
         })
       }
     })
-    
   }
 
   changeUser(event) {
@@ -77,7 +70,6 @@ class SignUpPage extends React.Component {
     } else {
       errors.password = '';
     }
-
     this.setState({errors});
   }
 

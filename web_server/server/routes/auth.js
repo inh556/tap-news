@@ -2,9 +2,13 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const validator = require('validator');
+var bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', jsonParser, (req, res, next) => {
+  
   const validationResult = validateSignupForm(req.body);
+  console.log(validationResult)
   if(!validationResult.success) {
     console.log('validationResult failed');
     return res.status(400).json({
@@ -13,9 +17,9 @@ router.post('/signup', (req, res, next) => {
       errors: validationResult.errors
     });
   }
-  return passport.authenticate('local.signup', (err) => {
+  return passport.authenticate('local-signup', (err) => {
     if(err) {
-      console.log(err);
+     // console.log(err);
       if(err.name === 'MongoError' && err.code === 11000) {
         return res.status(409).json({
           success: false,
@@ -37,7 +41,7 @@ router.post('/signup', (req, res, next) => {
   })(req, res, next)
 });
 
-router.post('./login', (req, res, next) => {
+router.post('/login', jsonParser, (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
   if(!validationResult.success) {
     return res.status(400).json({
@@ -65,10 +69,10 @@ router.post('./login', (req, res, next) => {
       token, user: userData
     });
   })(req, res, next);
-})
+});
 
 function validateSignupForm(payload) {
-  console.log(payload);
+  //console.log(payload);
   const errors = {};
   let isFormValid = true;
   let message = '';
@@ -76,7 +80,7 @@ function validateSignupForm(payload) {
     isFormValid = false;
     errors.email = 'Please proveid a correct email';
   }
-  if(!payload || typeof payload.passport !== 'string' || payload.password.length < 8) {
+  if(!payload || typeof payload.password !== 'string' || payload.password.length < 8) {
     isFormValid = false;
     errors.password = 'Password must have 8 characters';
   }
@@ -91,11 +95,10 @@ function validateSignupForm(payload) {
 }
 
 function validateLoginForm(payload) {
-  console.log(payload);
   const errors = {};
   let isFormValid = true;
   let message = '';
-  if(!payload || typeof payload.email !== 'string' || paylaod.email.trim().length === 0) {
+  if(!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
     isFormValid = false;
     errors.email = 'Please provide your email address';
   }
