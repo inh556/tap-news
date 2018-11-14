@@ -42,35 +42,5 @@ const Base = () => (
     </div>
   </Router>
 );
-// const Base = () => (
-//   <Router>
-//     <div>
-//       <nav className="nav-bar indigo lighten-1">
-//         <div className="nav-wrapper">
-//           <a href="/" className="brand-logo">Tap News</a>
-//           <ul id="nav-mobile" className="right">
-//             { Auth.isUserAuthenticated() ?
-//               (<div>
-//                 <li>{Auth.getEmail()}</li>
-//                 <li><a onClick={logout}>Log out</a></li>
-//               </div>)             
-//             : 
-//               (<div>
-//                 <li><Link to="/login">Log In</Link></li>
-//                 <li><Link to="/signup">Sign up</Link></li>
-//               </div>) 
-//             }
-//           </ul>
-//         </div>   
-//       </nav> 
-//       <br/>
-//       <Route exact path="/" render={()=>(Auth.isUserAuthenticated() ?
-//         (<App />) : (<LoginPage />))}/>
-//       <Route exact path="/login" component={LoginPage} />
-//       <Route exact path="/signup" component={SignUpPage} />
-//     </div>
-//   </Router>
-// );
-       
 
 export default Base;
