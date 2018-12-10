@@ -15,39 +15,35 @@ class LoginPage extends React.Component {
   };
   processForm(event) {
     event.preventDefault();
-    const email = this.state.user.email;
-    const password = this.state.user.password;
-    // need to pass to server later
-    console.log(email);
-    console.log(password);
-
     const url = 'http://' + window.location.hostname + ':3000/auth/login';
     const request = new Request(
       url,
       {
-        method: 'POST', 
-        header: {
+        method:'POST',
+        headers: {
           'Accept': 'application/json',
-          'Content.Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           email: this.state.user.email,
           password: this.state.user.password
         })
-    });
+      });
     fetch(request).then(response => {
       if(response.status === 200) {
         this.setState({errors: {}});
         response.json().then(json => {
           console.log(json);
-          Auth.authenticateUser(json.token, email);
+          Auth.authenticateUser(json.token, this.state.user.email);
           window.location.replace('/');
         })
       } 
       else {
         console.log('Login failed');
         response.json().then(json => {
-          const errors = json.errors ? json.error: {};
+          console.log(json)
+          const errors = json.errors ? json.errors: {};
+          console.log(errors)
           errors.summary = json.message;
           this.setState({errors});
         })
