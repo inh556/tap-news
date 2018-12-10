@@ -1,5 +1,5 @@
 import logging
-
+import operations
 from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 
 SERVER_HOST = 'localhost'
@@ -10,10 +10,16 @@ logging.basicConfig(format=logger_format)
 logger = logging.getLogger('backend_service')
 logger.setLevel(logging.DEBUG)
 
-def add(num1, num2):
-  """TEST METHOD"""
-  logger.debug('add is called with %d and %d', num1, num2)
-  return num1 + num2
+def get_one_news():
+  # test 
+  LOGGER.debug("getOneNews is called")
+  return operations.getOneNews()
+
+def get_news_summaries_for_user(user_id, page_num):
+  # Get news summaries for a user 
+  LOGGER.debug("get_news_summaries_for_user is called with %s and %s", user_id, page_num)
+  return operations.getNewsSummariesForUser(user_id, page_num)
+
 
 server = SimpleJSONRPCServer((SERVER_HOST, SERVER_PORT))
 server.register_function(add, 'add')
